@@ -32,6 +32,11 @@ export default function Counter ({ savedStart }) {
       setCurrent(Date.now())
     }, 500)
   }
+  const resetTimer = () => {
+    const startTime = Date.now()
+    window.fetch(`http://localhost:3001/?start=${startTime}`, { method: 'post' })
+    startTimer(startTime)
+  }
   if (savedStart > 0 && !timer) {
     setCurrent(Date.now())
     startTimer(savedStart)
@@ -42,7 +47,7 @@ export default function Counter ({ savedStart }) {
   return (
     <div>
       <p>You clicked {getDatesDiff(current - start)} ago</p>
-      <button onClick={() => startTimer(Date.now())}>{start ? 'Restart' : 'Start'}</button>
+      <button onClick={resetTimer}>{start ? 'Restart' : 'Start'}</button>
     </div>
   )
 }

@@ -23,5 +23,5 @@ test/**/out*
 # Editors
 **/.idea
 
-# Ingore counter data
+# Ingnore counter data
 db/*
