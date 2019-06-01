@@ -10,6 +10,6 @@ npm run install
 ### How to build
 ```sh
 npm run build
-# watch
+// watch
 npm run dev
 ```
