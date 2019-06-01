@@ -22,25 +22,27 @@ const getDatesDiff = (distance) => {
   return dataString
 }
 let timer
-export default function Counter () {
-  const [start, setStart] = useState(0)
+export default function Counter ({ savedStart }) {
+  const [start, setStart] = useState(savedStart)
   const [current, setCurrent] = useState(0)
-  const startTimer = () => {
-    setStart(Date.now())
+  const startTimer = (startTime) => {
+    setStart(startTime)
     clearInterval(timer)
     timer = setInterval(() => {
       setCurrent(Date.now())
     }, 500)
   }
-
+  if (savedStart > 0 && !timer) {
+    setCurrent(Date.now())
+    startTimer(savedStart)
+  }
   useEffect(() => {
     document.title = `You clicked ${getDatesDiff(current - start)} ago`
   }, [current])
-
   return (
     <div>
       <p>You clicked {getDatesDiff(current - start)} ago</p>
-      <button onClick={startTimer}>Restart</button>
+      <button onClick={() => startTimer(Date.now())}>{start ? 'Restart' : 'Start'}</button>
     </div>
   )
 }
